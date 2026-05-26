@@ -1,0 +1,1 @@
+select * from uber.analytics.gold_kpis
