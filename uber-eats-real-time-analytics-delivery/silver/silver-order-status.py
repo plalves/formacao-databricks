@@ -203,12 +203,12 @@ def silver_order_status():
         .withColumn("is_delayed",
                     F.when(F.col("delivery_time_minutes") > DELAY_THRESHOLD_MINUTES, True ).otherwise(False)            
         )
-        .withColumn("is_delivery",
+        .withColumn("is_delivered",
                     F.col("current_status") == "Order Delivered" 
         )
         .withColumn("event_severity",
                     F.when(F.col("is_delayed"), "CRITICAL")
-                    .when(F.col("is_delivery"), "INFO")
+                    .when(F.col("is_delivered"), "INFO")
                     .otherwise("NORMAL")
         )
         .withColumn("processed_timestamp", F.current_timestamp())
